@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//Классы необходимые для преобразования из JSON в C#
+//Эти классы относятся к преобразованию файла city.list.json и получения коллекции городов 
 namespace WeatherAPI.Converters
 {
 	public class CityCities

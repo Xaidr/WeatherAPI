@@ -21,12 +21,18 @@ using WeatherAPI.Converters;
 namespace WeatherAPI
 {
 	/// <summary>
-	/// Логика взаимодействия для MainWindow.xaml
+	/// Главный класс
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+		/// <summary>
+		/// Переменная, хранения текущего id города
+		/// </summary>
 		public double IdCity;
 
+		/// <summary>
+		/// Главный конструктор, инициализирующий элементы  
+		/// </summary>
 		public MainWindow()
 		{
 			InitializeComponent();
@@ -36,10 +42,13 @@ namespace WeatherAPI
 			CbCities.SelectedIndex = 0;
 			GetWeather(524901);
 
+			//Событие нажатия на кнопку "Update" запускает асинхронное обновление информации
 			BtnUpdate.Click += (object sender, RoutedEventArgs e) =>
 			{
 				GetWeather(IdCity);
 			};
+			//Событие выбора элемента из списка запускает асинхронное обновление информации,
+			//если элемент существует
 			CbCities.SelectionChanged += (object sender, SelectionChangedEventArgs e) =>
 			{
 				if (((sender as ComboBox).SelectedItem as CityCities) != null)
@@ -47,6 +56,10 @@ namespace WeatherAPI
 			};
 		}
 
+		/// <summary>
+		/// Асинхронный метод для получения "городов" из файла city.list.json
+		/// и привязывает его к CbCities, устанавливая по умолчанию Москву
+		/// </summary>
 		public async void GetListCities()
 		{
 			string Data = "";
@@ -74,7 +87,14 @@ namespace WeatherAPI
 				MessageBox.Show("Ошибочка вышла, даже не знаю, что делать...");
 			}
 		}
-
+		/// <summary>
+		/// асинхронный метод создает запрос для API,
+		/// декодирует JSON в необходимую информацию и
+		/// обновляет TbTemp, TbWindSpeed и TbDescript
+		/// </summary>
+		/// <param name="IdCity">
+		/// Задает необходимый id города для получения текущей погоды в нем
+		/// </param>
 		public async void GetWeather(double IdCity)
 		{
 			this.IdCity = IdCity;

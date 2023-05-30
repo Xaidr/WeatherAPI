@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//Классы необходимые для преобразования из JSON в C#
+//Эти классы относятся к запросу обновления данных о погоде
 namespace WeatherAPI.Converters
 {
 	public class City
